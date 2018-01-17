@@ -58,6 +58,15 @@ var FlyBehaviors;
         return FlyNoWay;
     }());
     FlyBehaviors.FlyNoWay = FlyNoWay;
+    var FlyRocketPowered = (function () {
+        function FlyRocketPowered() {
+        }
+        FlyRocketPowered.prototype.fly = function () {
+            console.log("I'm flying with a rocket !");
+        };
+        return FlyRocketPowered;
+    }());
+    FlyBehaviors.FlyRocketPowered = FlyRocketPowered;
 })(FlyBehaviors || (FlyBehaviors = {}));
 /// <reference path="ducksbehaviors.ts" />
 /// <reference path="flybehaviors.ts" />
@@ -69,6 +78,12 @@ var Ducks;
         function Duck() {
         }
         Duck.prototype.display = function () {
+        };
+        Duck.prototype.setFlyBehavior = function (fb) {
+            this.flyBehavior = fb;
+        };
+        Duck.prototype.setQuackBehavior = function (qb) {
+            this.quackBehavior = qb;
         };
         Duck.prototype.performFly = function () {
             this.flyBehavior.fly();
@@ -96,6 +111,20 @@ var Ducks;
         return MallarDuck;
     }(Duck));
     Ducks.MallarDuck = MallarDuck;
+    var ModelDuck = (function (_super) {
+        __extends(ModelDuck, _super);
+        function ModelDuck() {
+            var _this = _super.call(this) || this;
+            _this.quackBehavior = new DucksBehaviors.Quack();
+            _this.flyBehavior = new FlyBehaviors.FlyNoWay();
+            return _this;
+        }
+        ModelDuck.prototype.display = function () {
+            console.log("I'm a model Duck...");
+        };
+        return ModelDuck;
+    }(Duck));
+    Ducks.ModelDuck = ModelDuck;
 })(Ducks || (Ducks = {}));
 /// <reference path="ducks.ts" />
 var MiniDuckSimulator;
@@ -105,6 +134,10 @@ var MiniDuckSimulator;
         var mallard = new Ducks.MallarDuck();
         mallard.performQuack();
         mallard.performFly();
+        var model = new Ducks.ModelDuck();
+        model.performFly();
+        model.setFlyBehavior(new FlyBehaviors.FlyRocketPowered());
+        model.performFly();
     }
     MiniDuckSimulator.main = main;
 })(MiniDuckSimulator || (MiniDuckSimulator = {}));

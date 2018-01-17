@@ -9,6 +9,14 @@ namespace Ducks {
         public display() : void {
         }
 
+        public setFlyBehavior( fb : FlyBehaviors.FlyBehavior ) : void {
+            this.flyBehavior = fb;
+        }
+
+        public setQuackBehavior ( qb : DucksBehaviors.QuackBehavior ) : void {
+            this.quackBehavior = qb;
+        }
+
         public performFly() : void {
             this.flyBehavior.fly();
         }
@@ -33,6 +41,19 @@ namespace Ducks {
 
         public display() : void {
             console.log("I'm a real Mallard duck");
+        }
+    }
+
+    export class ModelDuck extends Duck {
+        constructor() {
+            super();
+
+            this.quackBehavior = new DucksBehaviors.Quack();
+            this.flyBehavior = new FlyBehaviors.FlyNoWay();
+        }
+
+        public display() : void {
+            console.log("I'm a model Duck...");
         }
     }
 }

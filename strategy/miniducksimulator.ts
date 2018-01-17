@@ -6,5 +6,12 @@ namespace MiniDuckSimulator {
 
         mallard.performQuack();
         mallard.performFly();
+
+        var model : Ducks.Duck = new Ducks.ModelDuck();
+
+        model.performFly();
+
+        model.setFlyBehavior(new FlyBehaviors.FlyRocketPowered());
+        model.performFly();
     }
 }

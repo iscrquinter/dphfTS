@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "target": "ES5",
+        "noImplicitAny": false,
+        "sourceMap": false,
+		"outFile": "miniducksimulator.js"
+    },
+
+	"files": [
+        "ducks.ts",
+        "ducksbehaviors.ts",
+        "flybehaviors.ts",
+        "main.ts",
+        "miniducksimulator.ts"
+	]
+
+}
